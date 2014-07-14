@@ -32,10 +32,10 @@ module Sprockets
 
       # Extract the path from everything after the leading slash
       # path is the logical path, which should simply be images/foo.png
-      puts "--- env['mode'] = #{env['mode']}"
-      puts "--- env['theme_name'] = #{env['theme_name']}"
+      # puts "--- env['mode'] = #{env['mode']}"
+      # puts "--- env['theme_name'] = #{env['theme_name']}"
       path = unescape(env['PATH_INFO'].to_s.sub(/^\//, ''))
-      puts "--- path = #{path}"
+      # puts "--- path = #{path}"
 
       # URLs containing a `".."` are rejected for security reasons.
       if forbidden_request?(path)
@@ -49,12 +49,12 @@ module Sprockets
 
       # Look up the asset.
       @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets"
-      puts "--- resolve @trail = #{@trail.inspect}"
+      # puts "--- resolve @trail = #{@trail.inspect}"
       asset = find_asset(path, :bundle => !body_only?(env))
       # Clear paths straight away so they are not kept which would mean a call  for the same logical_path from a different theme would find this asset.
       # Would prefer to simply extract path added above, but can't figure out how do get the full path (eg. /Users/bobop/Websites/volcanic/oliver/oliver/app/themes/development/workmates/assets) since Rails.root doesn't work here.
       clear_paths
-      puts "--- resolve @trail WITHOUT PATH = #{@trail.inspect}"
+      # puts "--- resolve @trail WITHOUT PATH = #{@trail.inspect}"
       # puts "--- asset = #{asset}"
 
       # `find_asset` returns nil if the asset doesn't exist
