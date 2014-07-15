@@ -48,18 +48,20 @@ module Sprockets
       end
 
       # Look up the asset.
-      @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets"
+      @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets" unless env['mode'] == 'staging' or env['mode'] == 'production' 
       # puts "--- resolve @trail.paths = #{@trail.paths.inspect}"
       asset = find_asset(path, :bundle => !body_only?(env))
-      # Clear paths straight away so they are not kept which would mean a call  for the same logical_path from a different theme would find this asset.
-      @trail.paths.delete("#{root}/app/themes/#{env['mode']}/#{env['theme_name']}/assets")
-      @trail.paths.delete("#{root}/app/themes/assets") # Wierd path which comes from super admin :s
-      # puts "--- resolve root = #{root.inspect}"
-      # Would prefer to simply extract path added above, but can't figure out how do get the full path (eg. /Users/bobop/Websites/volcanic/oliver/oliver/app/themes/development/workmates/assets) since Rails.root doesn't work here.
-      # clear_paths
-      # puts "--- resolve @trail.paths WITHOUT PATH = #{@trail.paths.inspect}"
-      expire_index!
-      # puts "--- asset = #{asset}"
+      unless env['mode'] == 'staging' or env['mode'] == 'production' 
+        # Clear paths straight away so they are not kept which would mean a call  for the same logical_path from a different theme would find this asset.
+        @trail.paths.delete("#{root}/app/themes/#{env['mode']}/#{env['theme_name']}/assets")
+        @trail.paths.delete("#{root}/app/themes/assets") # Wierd path which comes from super admin :s
+        # puts "--- resolve root = #{root.inspect}"
+        # Would prefer to simply extract path added above, but can't figure out how do get the full path (eg. /Users/bobop/Websites/volcanic/oliver/oliver/app/themes/development/workmates/assets) since Rails.root doesn't work here.
+        # clear_paths
+        # puts "--- resolve @trail.paths WITHOUT PATH = #{@trail.paths.inspect}"
+        expire_index!
+      end
+      # puts "--- env = #{env.inspect}"
 
       # `find_asset` returns nil if the asset doesn't exist
       if asset.nil?
