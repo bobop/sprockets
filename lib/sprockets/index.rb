@@ -62,13 +62,15 @@ module Sprockets
         logical_path_cache_key = cache_key_for(path, options)
         full_path_cache_key    = cache_key_for(asset.pathname, options)
 
+        # ALSO MONKEY PATCHED IN server.rb FROM LINE 51
+
         # Cache on Index
-        @assets[logical_path_cache_key] = @assets[full_path_cache_key] = asset
+        # @assets[logical_path_cache_key] = @assets[full_path_cache_key] = asset
 
         # Push cache upstream to Environment
-        @environment.instance_eval do
-          @assets[logical_path_cache_key] = @assets[full_path_cache_key] = asset
-        end
+        # @environment.instance_eval do
+        #   @assets[logical_path_cache_key] = @assets[full_path_cache_key] = asset
+        # end
 
         asset
       end

@@ -47,6 +47,8 @@ module Sprockets
         path = path.sub("-#{fingerprint}", '')
       end
 
+      # ALSO MONKEY PATCHED IN index.rb FROM LINE 65
+
       # Look up the asset.
       @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets" unless env['mode'] == 'staging' or env['mode'] == 'production' 
       # puts "--- resolve @trail.paths = #{@trail.paths.inspect}"
