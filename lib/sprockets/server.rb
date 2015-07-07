@@ -50,7 +50,9 @@ module Sprockets
       # ALSO MONKEY PATCHED IN index.rb FROM LINE 65
 
       # Look up the asset.
-      @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets" unless env['mode'] == 'staging' or env['mode'] == 'production' 
+      unless env['mode'] == 'staging' or env['mode'] == 'production'
+        @trail.paths << "app/themes/#{env['mode']}/#{env['theme_name']}/assets"
+      end
       # puts "--- resolve @trail.paths = #{@trail.paths.inspect}"
       asset = find_asset(path, :bundle => !body_only?(env))
       unless env['mode'] == 'staging' or env['mode'] == 'production' 

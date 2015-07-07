@@ -1,3 +1,5 @@
+
+
 require 'sprockets/asset_attributes'
 require 'sprockets/bundled_asset'
 require 'sprockets/caching'
@@ -138,13 +140,13 @@ module Sprockets
               extname = File.extname(logical_path)
               bower['main'].each do |fn|
                 if extname == "" || extname == File.extname(fn)
-                  # puts "--- pathname = #{pathname.dirname.join(fn)}"
+                  # puts "--- WITH BOWER pathname = #{pathname.dirname.join(fn)}"
                   yield pathname.dirname.join(fn)
                 end
               end
             end
           else
-            # puts "--- pathname = #{pathname}"
+            # puts "--- NO BOWER pathname = #{pathname}"
             yield pathname
           end
         end

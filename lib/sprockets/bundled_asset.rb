@@ -14,8 +14,10 @@ module Sprockets
       super(environment, logical_path, pathname)
 
       @processed_asset  = environment.find_asset(pathname, :bundle => false)
+      # puts "--- @processed_asset = #{@processed_asset.inspect}"
       @required_assets  = @processed_asset.required_assets
       @dependency_paths = @processed_asset.dependency_paths
+      # puts "--- @dependency_paths = #{@dependency_paths.inspect}"
 
       # Explode Asset into parts and gather the dependency bodies
       @source = to_a.map { |dependency| dependency.to_s }.join
