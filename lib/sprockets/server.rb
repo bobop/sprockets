@@ -61,7 +61,7 @@ module Sprockets
         # Clear paths straight away so they are not kept which would mean a call  for the same logical_path from a different theme would find this asset.
         @trail.paths.delete("#{root}/app/themes/#{env['mode']}/#{env['theme_name']}/assets")
         @trail.paths.delete("#{root}/app/themes/assets") # Wierd path which comes from super admin :s
-        @trail.paths << "app/themes/#{env['mode']}/_tephra"
+        @trail.paths.delete("app/themes/#{env['mode']}/_tephra")
 
         # puts "--- resolve root = #{root.inspect}"
         # Would prefer to simply extract path added above, but can't figure out how do get the full path (eg. /Users/bobop/Websites/volcanic/oliver/oliver/app/themes/development/workmates/assets) since Rails.root doesn't work here.
