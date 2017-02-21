@@ -79,8 +79,9 @@ module Sprockets
     def resolve(path, options = {}, &block)
       pathname   = Pathname.new(path)
       attributes = environment.attributes_for(pathname)
-      puts path
-      puts content_type
+      # puts attributes.inspect
+      # puts path
+      # puts content_type
       if path.to_s.start_with?('_tephra')
         case content_type
         when 'text/css'
@@ -92,7 +93,7 @@ module Sprockets
 
         path = "./../../../_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}"
         pathname = Pathname.new(path)
-        puts pathname
+        # puts pathname
       end
 
       if pathname.absolute?
