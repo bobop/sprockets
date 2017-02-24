@@ -91,7 +91,7 @@ module Sprockets
         end
         parts = path.to_s.split('/')
 
-        if ENV['DEPLOY_SERVER'] == true
+        if ENV['DEPLOY_SERVER'] == true || ENV['DEPLOY_SERVER'] == "true"
           path = "/deploy_themes/themes/#{ENV['MODE']}/_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}"
         else
           path = "./../../../_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}"
