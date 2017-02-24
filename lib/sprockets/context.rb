@@ -86,13 +86,15 @@ module Sprockets
         case content_type
         when 'text/css'
           folder = 'stylesheets'
+          extension = 'scss'
         when 'application/javascript'
           folder = 'javascripts'
+          extension = 'js'
         end
         parts = path.to_s.split('/')
 
         if ENV['DEPLOY_SERVER'] == true || ENV['DEPLOY_SERVER'] == "true"
-          path = "/deploy_themes/themes/#{ENV['MODE']}/_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}"
+          path = "/deploy_themes/themes/#{ENV['MODE']}/_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}.#{extension}"
         else
           path = "./../../../_tephra/#{parts[1]}/#{parts[2]}/assets/#{folder}/#{parts[2]}"
         end
