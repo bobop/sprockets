@@ -115,7 +115,7 @@ module Sprockets
         #
         #     http://example.org/assets/../../../etc/passwd
         #
-        path.include?("..")
+        path.include?("..") || Pathname.new(path).absolute? || path.include?("://")
       end
 
       # Returns a 403 Forbidden response tuple
